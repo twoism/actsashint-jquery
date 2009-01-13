@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>ActsAsHint - Tests</title>
+	<meta name="generator" content="TextMate http://macromates.com/">
+	<meta name="author" content="Christopher Burnett">
+	<script src="jquery-1.2.6.js" type="text/javascript" charset="utf-8"></script>
+	<script src="acts_as_hint.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script type="text/javascript" charset="utf-8">
+		$(function(){
+			$('.acts_as_hint').actsAsHint();
+			
+			var input = $('input:first');
+			var ta    = $('textarea:first');
+			
+			fireunit.compare( input.val(), input.attr('title'), "Should have set value to title for input." );	
+			fireunit.compare( ta.val(), ta.attr('title'), "Should have set value to title for textarea." );	
+			
+			input.focus();
+			fireunit.compare( input.val(),"" , "Should be blank on focus." );	
+			
+			input.blur();
+			fireunit.compare( input.val(), input.attr('title'), "Should be original value" );	
+			
+			var nv = "Diff Value";
+			
+			input.focus();
+			input.val(nv);
+			input.blur();
+			fireunit.compare( input.val(), nv, "Should be new value ("+nv+")" );	
+			
+			
+			ta.focus();
+			fireunit.compare( ta.val(),"" , "Should be blank on focus." );
+			
+			ta.blur();
+			fireunit.compare( ta.val(), ta.attr('title'), "Should be original value" );	
+			
+			var nv = "Diff Value";
+			
+			ta.focus();
+			ta.val(nv);
+			ta.blur();
+			fireunit.compare( ta.val(), nv, "Should be new value ("+nv+")" );
+									
+			fireunit.testDone();
+		});
+	</script>
+	
+	<style type="text/css" media="screen">
+		input,textarea{
+			font-family:Arial;
+			font-size:10px;
+		}
+		.hint{
+			font-style:italic;
+		}
+	</style>
+</head>
+<body>
+<input type="text" class="acts_as_hint" name="some_name" value="" id="some_name" title="My Value"><br>
+<textarea name="Name" class="acts_as_hint" title="Enter Text Here" rows="8" cols="40"></textarea>
+
+</body>
+</html>
