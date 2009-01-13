@@ -7,7 +7,10 @@
 			}).removeClass('hint').blur(function(){
 				if(this.value != '') return;
 				this.value = this._default;
-			}).addClass('hint').val($(this).attr('title')).get(0)._default = $(this).val();
+			}).addClass('hint')
+				.val($(this)
+				.attr('title'))
+				.get(0)._default = $(this).val();
 		});
 	};
 })(jQuery);
